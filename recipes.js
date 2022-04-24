@@ -1,4 +1,4 @@
-
+const recipes = [
     {
         "id": 1,
         "name" : "Limonade de Coco",
@@ -1723,3 +1723,4 @@
         "appliance": "Four",
         "ustensils":["rouleau à patisserie","fouet"]
     }
+]
