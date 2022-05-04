@@ -73,6 +73,7 @@ searchBar.addEventListener('input', function(){
 
         let a = filterRecipes(this.value);
         console.log(a);
+
     }
 
 });
@@ -92,7 +93,6 @@ function filterRecipes(input){
                 }
             }
         }
-
     }
 
     return result;
