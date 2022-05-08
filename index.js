@@ -2,6 +2,14 @@
 
 // =========================================================================== //
 
+const main = document.getElementById("recipes");
+
+recipes.forEach(recipe =>{
+    let item = new Recipe(recipe);
+    let template = new RecipeTemplate(item);
+    main.appendChild(template.element);
+})
+
 const searchBar = document.getElementById('search-bar__input');
 
 const _ingredients = [];
