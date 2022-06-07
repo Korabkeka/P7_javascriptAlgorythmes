@@ -13,11 +13,12 @@ class RecipeTemplate{
                     <h2 class="recipe__info__left--title">${this.recipe.name}</h2>
                     ${this.getListTemplate()}
                 </div>
+                <div class="recipe__info__right">
+                    <div class="recipe__info__right--time"><img src="/assets/clock.svg" alt="clock"/> ${this.recipe.time} min</div>
+                    <p class="recipe__info__right--description">${this.recipe.description}</p>
+                </div>
             </div>
-            <div class="recipe__info__right">
-                <div class="recipe__info__right--time">${this.recipe.time}</div>
-                <p class="recipe__info__right--description">${this.recipe.description}</p>
-            </div>
+            
         `
         return template;
     }
