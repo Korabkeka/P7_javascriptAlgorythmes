@@ -8,9 +8,48 @@
     <title>P7 algorythmes javascript</title>
 </head>
 <body>
+    <header>
+        <p><img src="/assets/logo.svg" alt="logo"></p>
+        <h1>Les petits plats</h1>
+    </header>
+
+    <section id="search-bar">
+        <input type="text" name="search-bar" id="search-bar__input">
+        <img src="/assets/search.svg" id="search-bar__icon" alt="search">
+    </section>
+    <section id="keywords"></section>
+    <div id="advanced__Search">
+        <div>
+            <div>
+                <input type="text" name="ingredients" id="ingredients" placeholder="ingrédients"></input>
+                <img src="/assets/Vector.svg" alt="arrow"/>
+            </div>
+            <ul id="ingredient-keywords"></ul>
+        </div>
+
+        <div >
+            <div>
+                <input type="text" name="appliance" id="appliance" placeholder="appareils"></input>
+                <img src="/assets/Vector.svg" alt="arrow"/>
+            </div>
+            <ul id="appliance-keywords"></ul>
+        </div>
+
+        <div>
+            <div>
+                <input type="text" name="ustensils" id="ustensils" placeholder="ustensiles"></input>
+                <img src="/assets/Vector.svg" alt="arrow"/>
+            </div>
+            <ul id="ustensils-keywords"></ul>
+        </div>
+    </div>
+    
+    
     
 
+    <main id="recipes"></main>
 
+    <script src="/scripts/templates/Recipe.js"></script>
     <script src="recipes.js"></script>
     <script src="index.js"></script>
 </body>
