@@ -346,6 +346,7 @@ function process(){
  *  
  */
 function filterRecipesByMainInput(input, data){
+    let start = performance.now();
     const result = [];
 
     for(let i = 0; i < data.length; i++){
@@ -361,6 +362,7 @@ function filterRecipesByMainInput(input, data){
             }
         }
     }
+    console.log(`temps de recherche principale: ${performance.now()-start}`);
     return result;
 
 }
