@@ -79,15 +79,13 @@ class Ingredient extends KeyWord{
 
         keyWordThumbs.appendChild(this.thumbElement);
         this.thumbElement.querySelector('.close').addEventListener('click', ()=>{
-            console.log(searchParams.searchKeywords, this.keyWord);
+
             this.thumbElement.parentElement.removeChild(this.thumbElement);
-            for (let i = 0; i < searchParams.searchKeywords.length; i++) {
-                const element = searchParams.searchKeywords[i].keyWord;
-                if(this.keyWord === element){
-                    searchParams.searchKeywords.splice(i,1);
-                }
-            }
+
+            searchParams.searchKeywords = searchParams.searchKeywords.filter(el => el.keyWord != this.keyWord);
+
             process();
+
         });
 
     }
@@ -119,15 +117,13 @@ class Appliance extends KeyWord{
 
         keyWordThumbs.appendChild(this.thumbElement);
         this.thumbElement.querySelector('.close').addEventListener('click', ()=>{
-            console.log(searchParams.searchKeywords, this.keyWord);
+
             this.thumbElement.parentElement.removeChild(this.thumbElement);
-            for (let i = 0; i < searchParams.searchKeywords.length; i++) {
-                const element = searchParams.searchKeywords[i].keyWord;
-                if(this.keyWord === element){
-                    searchParams.searchKeywords.splice(i,1);
-                }
-            }
+
+            searchParams.searchKeywords = searchParams.searchKeywords.filter(el => el.keyWord != this.keyWord);
+
             process();
+
         });
 
     }
@@ -159,15 +155,13 @@ class Ustensil extends KeyWord{
 
         keyWordThumbs.appendChild(this.thumbElement);
         this.thumbElement.querySelector('.close').addEventListener('click', ()=>{
-            console.log(searchParams.searchKeywords, this.keyWord);
+            
             this.thumbElement.parentElement.removeChild(this.thumbElement);
-            for (let i = 0; i < searchParams.searchKeywords.length; i++) {
-                const element = searchParams.searchKeywords[i].keyWord;
-                if(this.keyWord === element){
-                    searchParams.searchKeywords.splice(i,1);
-                }
-            }
+
+            searchParams.searchKeywords = searchParams.searchKeywords.filter(el => el.keyWord != this.keyWord);
+
             process();
+
         });
 
     }
@@ -188,14 +182,25 @@ function checkIfExist(item, array){
         array.push(item);
     }else{
         let exists = false;
-        for (let i = 0; i < array.length; i++){
+
+        array.forEach(el =>{
+            if(el.keyWord === item.keyWord){
+                exists = true;
+            }
+        })
+
+        if(!exists){
+            array.push(item);
+        }
+
+        /*for (let i = 0; i < array.length; i++){
             if(array[i].keyWord===item.keyWord){
                 exists = true;
             }
         }
         if(!exists){
             array.push(item);
-        }
+        }*/
     }   
 }
 
@@ -210,7 +215,21 @@ function getKeyWords(data){
     _ingredients = [];
     _ustensils = [];
 
-    for (let i = 0; i < data.length; i++){
+    data.forEach(el=>{
+        el.ingredients.forEach(item=>{
+            checkIfExist(new Ingredient(item.ingredient), _ingredients);
+        })
+
+        checkIfExist(new Appliance(el.appliance), _appareils);
+
+        el.ustensils.forEach(item=>{
+            checkIfExist(new Ustensil(item), _ustensils);
+        })
+
+    });
+
+    /*for (let i = 0; i < data.length; i++){
+        
 
         for(let j = 0; j < data[i].ingredients.length; j++){
             let tested = new Ingredient(data[i].ingredients[j].ingredient);
@@ -224,7 +243,7 @@ function getKeyWords(data){
             checkIfExist(tested, _ustensils);
         }
 
-    }
+    }*/
 
     allKeyWords = _ingredients.concat(_appareils, _ustensils);
 
@@ -235,7 +254,37 @@ function displayAvailableKeywords(keywords){
     applianceKeyWords.innerHTML = "";
     ustensilsKeyWords.innerHTML = "";
 
-    for (let i = 0; i < keywords.length; i++) {
+    keywords.forEach(kw=>{
+        if(kw instanceof Ingredient){
+            ingredientKeywords.appendChild(kw.listElement);
+            kw.listElement.addEventListener("click", ()=>{
+                searchParams.searchKeywords.push(kw);
+                kw.displayThumbElement();
+                process();
+                searchIngredients.value = "";
+            })
+        }else if(kw instanceof Appliance){
+            applianceKeyWords.appendChild(kw.listElement);
+            kw.listElement.addEventListener("click", ()=>{
+                searchParams.searchKeywords.push(kw);
+                kw.displayThumbElement();
+                process();
+                searchAppliance.value = "";
+            })
+        }else if(kw instanceof Ustensil){
+            ustensilsKeyWords.appendChild(kw.listElement);
+            kw.listElement.addEventListener("click", ()=>{
+                searchParams.searchKeywords.push(kw);
+                kw.displayThumbElement();
+                process();
+                searchUstensils.value = "";
+            });
+        }else{
+            console.log("unknown type");
+        }
+    })
+
+    /*for (let i = 0; i < keywords.length; i++) {
         if(keywords[i] instanceof Ingredient){
             ingredientKeywords.appendChild(keywords[i].listElement);
             keywords[i].listElement.addEventListener("click", ()=>{
@@ -264,7 +313,7 @@ function displayAvailableKeywords(keywords){
             console.log("unknown type");
         }
 
-    }
+    }*/
 }
 
 searchBar.addEventListener('input', function(){
@@ -294,9 +343,12 @@ function process(){
 
     if(!searchParams.mainInput){
         if(searchParams.searchKeywords.length > 0){
-            for(let i = 0; i < searchParams.searchKeywords.length; i++){
+            searchParams.searchKeywords.forEach(item=>{
+                filteredRecipes = filterRecipesByKeyword(item, filteredRecipes);
+            })
+            /*for(let i = 0; i < searchParams.searchKeywords.length; i++){
                 filteredRecipes = filterRecipesByKeyword(searchParams.searchKeywords[i], filteredRecipes);
-            }
+            }*/
             displayRecipes(filteredRecipes);
             getKeyWords(filteredRecipes);
             displayAvailableKeywords(allKeyWords);
@@ -307,10 +359,12 @@ function process(){
 
     }else if(searchParams.mainInput.length < 3){
         if(searchParams.searchKeywords.length > 0){
-            for(let i = 0; i < searchParams.searchKeywords.length; i++){
+            searchParams.searchKeywords.forEach(item=>{
+                filteredRecipes = filterRecipesByKeyword(item, filteredRecipes);
+            })
+            /*for(let i = 0; i < searchParams.searchKeywords.length; i++){
                 filteredRecipes = filterRecipesByKeyword(searchParams.searchKeywords[i], filteredRecipes);
-            }
-
+            }*/
             displayRecipes(filteredRecipes);
             getKeyWords(filteredRecipes);
             displayAvailableKeywords(allKeyWords);
@@ -325,9 +379,9 @@ function process(){
         filteredRecipes = filterRecipesByMainInput(searchParams.mainInput, filteredRecipes);
 
         if(searchParams.searchKeywords.length > 0){
-            for(let i = 0; i < searchParams.searchKeywords.length; i++){
-                filteredRecipes = filterRecipesByKeyword(searchParams.searchKeywords[i], filteredRecipes);
-            }
+            searchParams.searchKeywords.forEach(item=>{
+                filteredRecipes = filterRecipesByKeyword(item, filteredRecipes);
+            })
         }
         displayRecipes(filteredRecipes);
         getKeyWords(filteredRecipes);
@@ -346,9 +400,25 @@ function process(){
  *  
  */
 function filterRecipesByMainInput(input, data){
+    let start = performance.now();
     const result = [];
-
-    for(let i = 0; i < data.length; i++){
+    data.forEach(item=>{
+        if(item.name.toLowerCase().includes(input)){
+            result.push(item);
+        }else if(item.description.toLowerCase().includes(input)){
+            result.push(item);
+        }else{
+            item.ingredients.forEach(el=>{
+                if(el.ingredient.includes(input)){
+                    result.push(item);
+                }
+            });
+        }
+        
+    })
+    console.log(`temps de recherche principale: ${performance.now()-start}`);
+    return result;
+    /*for(let i = 0; i < data.length; i++){
         if(data[i].name.toLocaleLowerCase().includes(input)){
             result.push(data[i]);
         }else if(data[i].description.toLocaleLowerCase().includes(input)){
@@ -361,14 +431,40 @@ function filterRecipesByMainInput(input, data){
             }
         }
     }
-    return result;
+    return result;*/
 
 }
 
 function filterRecipesByKeyword(obj, data){
+    let start = performance.now();
     const result = [];
 
-    for(let i = 0; i < data.length; i++){
+    data.forEach(item=>{
+
+        if(obj instanceof Ingredient){
+            item.ingredients.forEach(el=>{
+                if(el.ingredient.toLowerCase().includes(obj.keyWord)){
+                    result.push(item);
+                }
+            });
+        }else if(obj instanceof Appliance){
+            if(item.appliance.toLowerCase().includes(obj.keyWord)){
+                result.push(item);
+            }
+        }else if(obj instanceof Ustensil){
+            item.ustensils.forEach(el=>{
+                if(el.toLowerCase().includes(obj.keyWord)){
+                    result.push(item);
+                }
+            });
+        }else{
+            throw "unknown input type"
+        }
+
+    });
+    return result;
+
+    /*for(let i = 0; i < data.length; i++){
         if(obj instanceof Ingredient){
             for (let j = 0; j < data[i].ingredients.length; j++) {
                 if(data[i].ingredients[j].ingredient.toLowerCase().includes(obj.keyWord)){
@@ -389,7 +485,7 @@ function filterRecipesByKeyword(obj, data){
             throw "Unknown input type"
         }
     }
-    return result;
+    return result;*/
 
 }
 
@@ -397,9 +493,7 @@ function clearKeywordsList(){
     let keywordsList = document.querySelectorAll('.keywords');
 
     if(keywordsList.length > 0){
-        for (let i = 0; i < keywordsList.length; i++){
-            keywordsList[i].parentNode.removeChild(keywordsList[i]);
-        }
+        keywordsList.forEach(kw => kw.parentNode.removeChild(kw));
         return;
     }else{
         return;
