@@ -4,7 +4,7 @@
 
 const main = document.getElementById("recipes");
 let filteredRecipes = [...recipes];
-
+const filter = new RecipeFilter(filteredRecipes);
 
 /**
  * 
@@ -377,6 +377,7 @@ function process(){
 
     }else{
         filteredRecipes = filterRecipesByMainInput(searchParams.mainInput, filteredRecipes);
+        //filteredRecipes = filter.filterByInput(searchParams.mainInput);
 
         if(searchParams.searchKeywords.length > 0){
             searchParams.searchKeywords.forEach(item=>{
