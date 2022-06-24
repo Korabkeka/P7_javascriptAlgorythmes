@@ -28,21 +28,52 @@ h1{
 #search-bar{
     width: 100%;
     margin: 0 auto;
+    display: flex;
 }
 #search-bar__input{
     background-color: #E7E7E7;
-    border-right: none;
+    border: none;
+    flex-grow: 1;
+    padding-left: 5px;
 }
 #search-bar__icon{
     background-color: #E7E7E7;
-    border-left: none;
+    border: none;
+    padding: 5px;
 }
 
 #keywords{
     width: 100%;
     margin: 20px auto;
-    height: 50px;
-    border: 1px solid black;
+    height: auto;
+    display: flex;
+}
+.ingredient-keyword-thumb{
+    padding: 10px;
+    color: white;
+    background-color: #3282F7;
+    margin: 0 10px 10px 0;
+    border-radius: 5px;
+}
+.appareil-keyword-thumb{
+    padding: 10px;
+    color: white;
+    background-color: #68D9A4;
+    margin: 0 10px 10px 0;
+    border-radius: 5px;
+}
+.ustensil-keyword-thumb{
+    padding: 10px;
+    color: white;
+    background-color: #ED6454;
+    margin: 0 10px 10px 0;
+    border-radius: 5px;
+}
+
+.close{
+    border: 2px solid white;
+    padding: 2px;
+    border-radius: 50%;
 }
 
 #advanced__Search{

@@ -1,4 +1,4 @@
-// algorythme using for, while, do while...
+// algorythme using javascript array methods
 
 // =========================================================================== //
 
@@ -61,6 +61,7 @@ class Ingredient extends KeyWord{
         this.listElement.innerHTML = this.keyWord;
         this.listElement.classList.add("keywords");
         this.thumbElement = document.createElement('div');
+        this.thumbElement.classList.add('ingredient-keyword-thumb');
         this.thumbElement.innerHTML = this.getThumbTemplate();
     }
 
@@ -76,7 +77,7 @@ class Ingredient extends KeyWord{
     }
 
     displayThumbElement(){
-
+        if(!keyWordThumbs.textContent.includes(this.keyWord)){
         keyWordThumbs.appendChild(this.thumbElement);
         this.thumbElement.querySelector('.close').addEventListener('click', ()=>{
 
@@ -87,7 +88,7 @@ class Ingredient extends KeyWord{
             process();
 
         });
-
+    }
     }
 
 }
@@ -99,6 +100,7 @@ class Appliance extends KeyWord{
         this.listElement.textContent = this.keyWord;
         this.listElement.classList.add("keywords");
         this.thumbElement = document.createElement('div');
+        this.thumbElement.classList.add('appareil-keyword-thumb');
         this.thumbElement.innerHTML = this.getThumbTemplate();
     }
 
@@ -115,6 +117,7 @@ class Appliance extends KeyWord{
 
     displayThumbElement(){
 
+        if(!keyWordThumbs.textContent.includes(this.keyWord)){
         keyWordThumbs.appendChild(this.thumbElement);
         this.thumbElement.querySelector('.close').addEventListener('click', ()=>{
 
@@ -125,7 +128,7 @@ class Appliance extends KeyWord{
             process();
 
         });
-
+        }
     }
 
 }
@@ -137,6 +140,7 @@ class Ustensil extends KeyWord{
         this.listElement.textContent = this.keyWord;
         this.listElement.classList.add("keywords");
         this.thumbElement = document.createElement('div');
+        this.thumbElement.classList.add('ustensil-keyword-thumb');
         this.thumbElement.innerHTML = this.getThumbTemplate();
     }
 
@@ -152,7 +156,8 @@ class Ustensil extends KeyWord{
     }
 
     displayThumbElement(){
-
+        
+        if(!keyWordThumbs.textContent.includes(this.keyWord)){
         keyWordThumbs.appendChild(this.thumbElement);
         this.thumbElement.querySelector('.close').addEventListener('click', ()=>{
             
@@ -163,7 +168,7 @@ class Ustensil extends KeyWord{
             process();
 
         });
-
+    }
     }
 
 }
@@ -250,6 +255,7 @@ function getKeyWords(data){
 }
 
 function displayAvailableKeywords(keywords){
+
     ingredientKeywords.innerHTML = "";
     applianceKeyWords.innerHTML = "";
     ustensilsKeyWords.innerHTML = "";
@@ -507,64 +513,64 @@ function searchKeywordsByType(input, type){
         case "Ingredient":
             if(ingredientKeywords.hasChildNodes()){
                 let children = ingredientKeywords.childNodes;
-                for (let i = 0; i < children.length; i++) {
-                    if(!children[i].textContent.includes(input)){
-                        children[i].classList.add("hide");
+                children.forEach(child=>{
+                    if(!child.textContent.includes(input)){
+                        child.classList.add("hide");
                     }
-                }
+                });
             }else{
                 getKeyWords(filteredRecipes);
                 displayAvailableKeywords(_ingredients);
                 let children = ingredientKeywords.childNodes;
-                for (let i = 0; i < children.length; i++) {
-                    if(!children[i].textContent.includes(input)){
-                        children[i].classList.add("hide");
+                children.forEach(child=>{
+                    if(!child.textContent.includes(input)){
+                        child.classList.add("hide");
                     }else{
-                        secondaryIngredients.push(children[i].textContent)
+                        secondaryIngredients.push(child.textContent)
                     }
-                }
+                });
             }
             break;
         case "Appliance":
             if(applianceKeyWords.hasChildNodes()){
                 let children = applianceKeyWords.childNodes;
-                for (let i = 0; i < children.length; i++) {
-                    if(!children[i].textContent.includes(input)){
-                        children[i].classList.add("hide");
+                children.forEach(child=>{
+                    if(!child.textContent.includes(input)){
+                        child.classList.add("hide");
                     }
-                }
+                });
             }else{
                 getKeyWords(filteredRecipes);
                 displayAvailableKeywords(_appareils);
                 let children = applianceKeyWords.childNodes;
-                for (let i = 0; i < children.length; i++) {
-                    if(!children[i].textContent.includes(input)){
-                        children[i].classList.add("hide");
+                children.forEach(child=>{
+                    if(!child.textContent.includes(input)){
+                        child.classList.add("hide");
                     }else{
-                        secondaryAppareils.push(children[i].textContent)
+                        secondaryAppareils.push(child.textContent)
                     }
-                }
+                });
             }
             break;
         case "Ustensil":
             if(ustensilsKeyWords.hasChildNodes()){
                 let children = ustensilsKeyWords.childNodes;
-                for (let i = 0; i < children.length; i++) {
-                    if(!children[i].textContent.includes(input)){
-                        children[i].classList.add("hide");
+                children.forEach(child=>{
+                    if(!child.textContent.includes(input)){
+                        child.classList.add("hide");
                     }
-                }
+                });
             }else{
                 getKeyWords(filteredRecipes);
                 displayAvailableKeywords(_ustensils);
                 let children = ustensilsKeyWords.childNodes;
-                for (let i = 0; i < children.length; i++) {
-                    if(!children[i].textContent.includes(input)){
-                        children[i].classList.add("hide");
+                children.forEach(child=>{
+                    if(!child.textContent.includes(input)){
+                        child.classList.add("hide");
                     }else{
-                        secondaryUstensils.push(children[i].textContent)
+                        secondaryUstensils.push(child.textContent)
                     }
-                }
+                });
             }
             break;
         default:
