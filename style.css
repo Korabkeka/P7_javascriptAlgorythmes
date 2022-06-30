@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 body{
@@ -41,7 +42,6 @@ h1{
     border: none;
     padding: 5px;
 }
-
 #keywords{
     width: 100%;
     margin: 20px auto;
@@ -69,7 +69,76 @@ h1{
     margin: 0 10px 10px 0;
     border-radius: 5px;
 }
+.container{
+    display: flex;
+}
+#before-ingredient, #before-appliance, #before-ustensil{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    height: 69px;
+    min-width: 170px;
+    margin-right: 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    color: white;
 
+}
+#before-ingredient{
+    background-color: #3282F7;
+}
+#before-appliance{
+    background-color: #68D9A4;
+}
+#before-ustensil{
+    background-color: #ED6454;
+}
+#after-ingredient, #after-appliance, #after-ustensil{
+    display: none;
+    flex-direction: column;
+    font-size: 18px;
+    border-radius: 5px;
+    color: white;
+    margin-right: 20px;
+    padding: 10px;
+    height: fit-content;
+    width: fit-content;
+}
+#after-ingredient{
+    background-color: #3282F7;
+}
+#after-appliance{
+    background-color: #68D9A4;
+}
+#after-ustensil{
+    background-color: #ED6454;
+}
+.input{
+    display: flex;
+    min-width: 130px;
+    width: auto;
+    height: 49px;
+    align-items: center;
+    justify-content: space-between;
+}
+input{
+    flex-grow: 1;
+    height: 50px;
+    border: none;
+    background-color: transparent;
+}
+::placeholder {
+    color: rgba(255, 255, 255, 0.674);
+  }
+ul{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 376px;
+    margin: 0;
+    padding: 0;
+}
 .close{
     border: 2px solid white;
     padding: 2px;
@@ -78,6 +147,7 @@ h1{
 
 #advanced__Search{
     display: flex;
+    position: absolute;
     width: 100%;
     margin: 0 auto;
 }
@@ -89,6 +159,7 @@ h1{
     display: flex;
     flex-wrap: wrap;
     margin: 20px auto;
+    margin-top: 130px;
     width: 100%;
     height: auto;
 }

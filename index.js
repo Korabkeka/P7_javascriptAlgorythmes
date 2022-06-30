@@ -268,7 +268,7 @@ function displayAvailableKeywords(keywords){
                 kw.displayThumbElement();
                 process();
                 searchIngredients.value = "";
-            })
+            });
         }else if(kw instanceof Appliance){
             applianceKeyWords.appendChild(kw.listElement);
             kw.listElement.addEventListener("click", ()=>{
@@ -288,7 +288,7 @@ function displayAvailableKeywords(keywords){
         }else{
             console.log("unknown type");
         }
-    })
+    });
 
     /*for (let i = 0; i < keywords.length; i++) {
         if(keywords[i] instanceof Ingredient){
@@ -320,6 +320,7 @@ function displayAvailableKeywords(keywords){
         }
 
     }*/
+
 }
 
 searchBar.addEventListener('input', function(){
@@ -607,3 +608,8 @@ searchUstensils.addEventListener("input", function(){
     }
 });
 
+function show(element){
+    let name = element.id.split('-')[1];
+    document.getElementById(`after-${name}`).style.display = "flex";
+    document.getElementById(`before-${name}`).style.display = "none";
+}
