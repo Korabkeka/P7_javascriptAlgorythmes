@@ -103,7 +103,6 @@ h1{
     margin-right: 20px;
     padding: 10px;
     height: fit-content;
-    width: fit-content;
 }
 #after-ingredient{
     background-color: #3282F7;
@@ -131,14 +130,20 @@ input{
 ::placeholder {
     color: rgba(255, 255, 255, 0.674);
   }
-ul{
+#ingredient-keywords, #appliance-keywords, #ustensils-keywords{
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-height: 376px;
-    margin: 0;
-    padding: 0;
+    max-height: 232px;
+    width: 100%;
 }
+#ingredient-keywords p, #appliance-keywords p, #ustensils-keywords p{
+    margin: 0;
+    margin-right: 10px;
+}
+
 .close{
     border: 2px solid white;
     padding: 2px;

@@ -57,7 +57,7 @@ class KeyWord{
 class Ingredient extends KeyWord{
     constructor(keyWord){
         super(keyWord)
-        this.listElement = document.createElement('li');
+        this.listElement = document.createElement('p');
         this.listElement.innerHTML = this.keyWord;
         this.listElement.classList.add("keywords");
         this.thumbElement = document.createElement('div');
@@ -96,7 +96,7 @@ class Ingredient extends KeyWord{
 class Appliance extends KeyWord{
     constructor(keyWord){
         super(keyWord)
-        this.listElement = document.createElement('li');
+        this.listElement = document.createElement('p');
         this.listElement.textContent = this.keyWord;
         this.listElement.classList.add("keywords");
         this.thumbElement = document.createElement('div');
@@ -136,7 +136,7 @@ class Appliance extends KeyWord{
 class Ustensil extends KeyWord{
     constructor(keyWord){
         super(keyWord)
-        this.listElement = document.createElement('li');
+        this.listElement = document.createElement('p');
         this.listElement.textContent = this.keyWord;
         this.listElement.classList.add("keywords");
         this.thumbElement = document.createElement('div');
@@ -260,9 +260,13 @@ function displayAvailableKeywords(keywords){
     applianceKeyWords.innerHTML = "";
     ustensilsKeyWords.innerHTML = "";
 
+    let ingredients = [];
+    let appliances = [];
+    let ustensils = [];
+
     keywords.forEach(kw=>{
         if(kw instanceof Ingredient){
-            ingredientKeywords.appendChild(kw.listElement);
+            ingredients.push(kw.listElement);
             kw.listElement.addEventListener("click", ()=>{
                 searchParams.searchKeywords.push(kw);
                 kw.displayThumbElement();
@@ -270,7 +274,7 @@ function displayAvailableKeywords(keywords){
                 searchIngredients.value = "";
             });
         }else if(kw instanceof Appliance){
-            applianceKeyWords.appendChild(kw.listElement);
+            appliances.push(kw.listElement);
             kw.listElement.addEventListener("click", ()=>{
                 searchParams.searchKeywords.push(kw);
                 kw.displayThumbElement();
@@ -278,7 +282,7 @@ function displayAvailableKeywords(keywords){
                 searchAppliance.value = "";
             })
         }else if(kw instanceof Ustensil){
-            ustensilsKeyWords.appendChild(kw.listElement);
+            ustensils.push(kw.listElement);
             kw.listElement.addEventListener("click", ()=>{
                 searchParams.searchKeywords.push(kw);
                 kw.displayThumbElement();
@@ -290,37 +294,51 @@ function displayAvailableKeywords(keywords){
         }
     });
 
-    /*for (let i = 0; i < keywords.length; i++) {
-        if(keywords[i] instanceof Ingredient){
-            ingredientKeywords.appendChild(keywords[i].listElement);
-            keywords[i].listElement.addEventListener("click", ()=>{
-                searchParams.searchKeywords.push(keywords[i]);
-                keywords[i].displayThumbElement();
-                process();
-                searchIngredients.value = "";
-            })
-        }else if(keywords[i] instanceof Appliance){
-            applianceKeyWords.appendChild(keywords[i].listElement);
-            keywords[i].listElement.addEventListener("click", ()=>{
-                searchParams.searchKeywords.push(keywords[i]);
-                keywords[i].displayThumbElement();
-                process();
-                searchAppliance.value = "";
-            })
-        }else if(keywords[i] instanceof Ustensil){
-            ustensilsKeyWords.appendChild(keywords[i].listElement);
-            keywords[i].listElement.addEventListener("click", ()=>{
-                searchParams.searchKeywords.push(keywords[i]);
-                keywords[i].displayThumbElement();
-                process();
-                searchUstensils.value = "";
-            });
-        }else{
-            console.log("unknown type");
-        }
+    let $wrapper1 = document.createElement('div');
+    let $wrapper2 = document.createElement('div');
+    let $wrapper3 = document.createElement('div');
 
-    }*/
+    if(ingredients.length <= 10){
+        ingredients.forEach(element=>{
+            $wrapper1.appendChild(element);
+        });
+        ingredientKeywords.appendChild($wrapper1);
+    }else if(ingredients.length > 10 && ingredients.length <=20){
+        ingredients.forEach((element, index)=>{
+            if(index <=9){
+                $wrapper1.appendChild(element);
+            }else{
+                $wrapper2.appendChild(element);
+            }
+        });
+        ingredientKeywords.appendChild($wrapper1);
+        ingredientKeywords.appendChild($wrapper2);
+    }else{
+        ingredients.forEach((element, index)=>{
+            if(index <=9){
+                $wrapper1.appendChild(element);
+            }else if(index > 9 && index <=19){
+                $wrapper2.appendChild(element);
+            }else{
+                $wrapper3.appendChild(element);
+            }
+        });
+        ingredientKeywords.appendChild($wrapper1);
+        ingredientKeywords.appendChild($wrapper2);
+        ingredientKeywords.appendChild($wrapper3);
+    }
 
+    let $applianceWrapper = document.createElement('div');
+    appliances.forEach(element=>{
+        $applianceWrapper.appendChild(element);
+    });
+    applianceKeyWords.appendChild($applianceWrapper);
+
+    let $ustensilWrapper = document.createElement('div');
+    ustensils.forEach(element=>{
+        $ustensilWrapper.appendChild(element);
+    });
+    ustensilsKeyWords.appendChild($ustensilWrapper);
 }
 
 searchBar.addEventListener('input', function(){
