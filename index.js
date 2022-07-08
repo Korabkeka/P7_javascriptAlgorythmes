@@ -233,23 +233,6 @@ function getKeyWords(data){
 
     });
 
-    /*for (let i = 0; i < data.length; i++){
-        
-
-        for(let j = 0; j < data[i].ingredients.length; j++){
-            let tested = new Ingredient(data[i].ingredients[j].ingredient);
-            checkIfExist(tested, _ingredients);
-        }
-
-        checkIfExist(new Appliance(data[i].appliance), _appareils);
-        
-        for(let k = 0; k < data[i].ustensils.length; k++){
-            let tested = new Ustensil(data[i].ustensils[k]);
-            checkIfExist(tested, _ustensils);
-        }
-
-    }*/
-
     allKeyWords = _ingredients.concat(_appareils, _ustensils);
 
 }
@@ -426,43 +409,25 @@ function process(){
  *  
  */
 function filterRecipesByMainInput(input, data){
-    let start = performance.now();
-    const result = [];
-    data.forEach(item=>{
+    const result = data.filter(item=>{
         if(item.name.toLowerCase().includes(input)){
-            result.push(item);
+            return true;
         }else if(item.description.toLowerCase().includes(input)){
-            result.push(item);
+            return true;
         }else{
             item.ingredients.forEach(el=>{
                 if(el.ingredient.includes(input)){
-                    result.push(item);
+                    return true;
                 }
             });
         }
         
     })
-    console.log(`temps de recherche principale: ${performance.now()-start}`);
     return result;
-    /*for(let i = 0; i < data.length; i++){
-        if(data[i].name.toLocaleLowerCase().includes(input)){
-            result.push(data[i]);
-        }else if(data[i].description.toLocaleLowerCase().includes(input)){
-            result.push(data[i]);
-        }else{
-            for (let j = 0; j < data[i].ingredients.length; j++){
-                if(data[i].ingredients[j].ingredient.toLocaleLowerCase().includes(input)){
-                    result.push(data[i]);
-                }
-            }
-        }
-    }
-    return result;*/
 
 }
 
 function filterRecipesByKeyword(obj, data){
-    let start = performance.now();
     const result = [];
 
     data.forEach(item=>{
@@ -490,29 +455,6 @@ function filterRecipesByKeyword(obj, data){
     });
     return result;
 
-    /*for(let i = 0; i < data.length; i++){
-        if(obj instanceof Ingredient){
-            for (let j = 0; j < data[i].ingredients.length; j++) {
-                if(data[i].ingredients[j].ingredient.toLowerCase().includes(obj.keyWord)){
-                    result.push(data[i]);
-                } 
-            }
-        }else if(obj instanceof Appliance){
-            if(data[i].appliance.toLowerCase().includes(obj.keyWord)){
-                result.push(data[i]);
-            }
-        }else if(obj instanceof Ustensil){
-            for (let j = 0; j < data[i].ustensils.length; j++) {
-                if(data[i].ustensils[j].toLowerCase().includes(obj.keyWord)){
-                    result.push(data[i]);
-                }
-            }
-        }else{
-            throw "Unknown input type"
-        }
-    }
-    return result;*/
-
 }
 
 function clearKeywordsList(){
@@ -530,6 +472,7 @@ function searchKeywordsByType(input, type){
 
     switch (type) {
         case "Ingredient":
+            console.log(ingredientKeywords.textContent)
             if(ingredientKeywords.hasChildNodes()){
                 let children = ingredientKeywords.childNodes;
                 children.forEach(child=>{
@@ -545,7 +488,7 @@ function searchKeywordsByType(input, type){
                     if(!child.textContent.includes(input)){
                         child.classList.add("hide");
                     }else{
-                        secondaryIngredients.push(child.textContent)
+                        secondaryIngredients.push(child.textContent);
                     }
                 });
             }
@@ -605,7 +548,9 @@ searchIngredients.addEventListener("input", function(){
         searchKeywordsByType(this.value, "Ingredient");
     }else{
         process();
+
     }
+    console.log(ingredientKeywords, filteredRecipes);
 });
 
 searchAppliance.addEventListener("input", function(){
