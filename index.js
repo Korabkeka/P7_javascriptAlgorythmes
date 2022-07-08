@@ -233,23 +233,6 @@ function getKeyWords(data){
 
     });
 
-    /*for (let i = 0; i < data.length; i++){
-        
-
-        for(let j = 0; j < data[i].ingredients.length; j++){
-            let tested = new Ingredient(data[i].ingredients[j].ingredient);
-            checkIfExist(tested, _ingredients);
-        }
-
-        checkIfExist(new Appliance(data[i].appliance), _appareils);
-        
-        for(let k = 0; k < data[i].ustensils.length; k++){
-            let tested = new Ustensil(data[i].ustensils[k]);
-            checkIfExist(tested, _ustensils);
-        }
-
-    }*/
-
     allKeyWords = _ingredients.concat(_appareils, _ustensils);
 
 }
@@ -369,9 +352,6 @@ function process(){
             searchParams.searchKeywords.forEach(item=>{
                 filteredRecipes = filterRecipesByKeyword(item, filteredRecipes);
             })
-            /*for(let i = 0; i < searchParams.searchKeywords.length; i++){
-                filteredRecipes = filterRecipesByKeyword(searchParams.searchKeywords[i], filteredRecipes);
-            }*/
             displayRecipes(filteredRecipes);
             getKeyWords(filteredRecipes);
             displayAvailableKeywords(allKeyWords);
@@ -408,7 +388,6 @@ function process(){
  *  
  */
 function filterRecipesByMainInput(input, data){
-    let start = performance.now();
     const result = [];
     data.forEach(item=>{
         if(item.name.toLowerCase().includes(input)){
@@ -423,28 +402,12 @@ function filterRecipesByMainInput(input, data){
             });
         }
         
-    })
-    console.log(`temps de recherche principale: ${performance.now()-start}`);
+    });
     return result;
-    /*for(let i = 0; i < data.length; i++){
-        if(data[i].name.toLocaleLowerCase().includes(input)){
-            result.push(data[i]);
-        }else if(data[i].description.toLocaleLowerCase().includes(input)){
-            result.push(data[i]);
-        }else{
-            for (let j = 0; j < data[i].ingredients.length; j++){
-                if(data[i].ingredients[j].ingredient.toLocaleLowerCase().includes(input)){
-                    result.push(data[i]);
-                }
-            }
-        }
-    }
-    return result;*/
 
 }
 
 function filterRecipesByKeyword(obj, data){
-    let start = performance.now();
     const result = [];
 
     data.forEach(item=>{
@@ -471,29 +434,6 @@ function filterRecipesByKeyword(obj, data){
 
     });
     return result;
-
-    /*for(let i = 0; i < data.length; i++){
-        if(obj instanceof Ingredient){
-            for (let j = 0; j < data[i].ingredients.length; j++) {
-                if(data[i].ingredients[j].ingredient.toLowerCase().includes(obj.keyWord)){
-                    result.push(data[i]);
-                } 
-            }
-        }else if(obj instanceof Appliance){
-            if(data[i].appliance.toLowerCase().includes(obj.keyWord)){
-                result.push(data[i]);
-            }
-        }else if(obj instanceof Ustensil){
-            for (let j = 0; j < data[i].ustensils.length; j++) {
-                if(data[i].ustensils[j].toLowerCase().includes(obj.keyWord)){
-                    result.push(data[i]);
-                }
-            }
-        }else{
-            throw "Unknown input type"
-        }
-    }
-    return result;*/
 
 }
 
@@ -613,3 +553,20 @@ function show(element){
     document.getElementById(`after-${name}`).style.display = "flex";
     document.getElementById(`before-${name}`).style.display = "none";
 }
+window.addEventListener('click', (e)=>{
+    let beforeIngredient = document.getElementById('before-ingredient');
+    let afterIngredient = document.getElementById('after-ingredient');
+    let beforeAppliance = document.getElementById('before-appliance');
+    let afterAppliance = document.getElementById('after-appliance');
+    let beforeUstensil = document.getElementById('before-ustensil');
+    let afterUstensil = document.getElementById('after-ustensil');
+    if(e.target !== afterIngredient && e.target !== afterAppliance && e.target !== afterUstensil && e.target !== beforeIngredient && e.target !== beforeAppliance && e.target !== beforeUstensil){
+            afterIngredient.style.display = "none";
+        afterAppliance.style.display = "none";
+        afterUstensil.style.display = "none";
+        beforeIngredient.style.display = "flex";
+        beforeAppliance.style.display = "flex";
+        beforeUstensil.style.display = "flex";
+    }
+
+});
