@@ -197,15 +197,6 @@ function checkIfExist(item, array){
         if(!exists){
             array.push(item);
         }
-
-        /*for (let i = 0; i < array.length; i++){
-            if(array[i].keyWord===item.keyWord){
-                exists = true;
-            }
-        }
-        if(!exists){
-            array.push(item);
-        }*/
     }   
 }
 
@@ -472,7 +463,6 @@ function searchKeywordsByType(input, type){
 
     switch (type) {
         case "Ingredient":
-            console.log(ingredientKeywords.textContent)
             if(ingredientKeywords.hasChildNodes()){
                 let children = ingredientKeywords.childNodes;
                 children.forEach(child=>{
