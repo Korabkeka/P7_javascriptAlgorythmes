@@ -9,13 +9,14 @@ class RecipeTemplate{
         let template = `
             <div class="recipe__image"></div>
             <div class="recipe__info">
-                <div class="recipe__info__left">
-                    <h2 class="recipe__info__left--title">${this.recipe.name}</h2>
-                    ${this.getListTemplate()}
+                <div class="recipe__info__top">
+                    <h2 class="recipe__info__top--title">${this.recipe.name}</h2>
+                    <div class="recipe__info__top--time"><img src="/assets/clock.svg" alt="clock"/> ${this.recipe.time} min</div>
+                    
                 </div>
-                <div class="recipe__info__right">
-                    <div class="recipe__info__right--time"><img src="/assets/clock.svg" alt="clock"/> ${this.recipe.time} min</div>
-                    <p class="recipe__info__right--description">${this.recipe.description}</p>
+                <div class="recipe__info__bottom">
+                    ${this.getListTemplate()}
+                    <p class="recipe__info__bottom--description">${this.recipe.description}</p>
                 </div>
             </div>
             
