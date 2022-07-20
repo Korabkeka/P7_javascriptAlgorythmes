@@ -49,25 +49,44 @@ h1{
     display: flex;
 }
 .ingredient-keyword-thumb{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 10px;
     color: white;
     background-color: #3282F7;
     margin: 0 10px 10px 0;
     border-radius: 5px;
 }
+.ingredient-keyword-thumb>span{
+    display: flex;
+}
 .appareil-keyword-thumb{
+    display: flex;
+    align-items: center;
     padding: 10px;
     color: white;
     background-color: #68D9A4;
     margin: 0 10px 10px 0;
     border-radius: 5px;
 }
+.appareil-keyword-thumb  span{
+    display: flex;
+}
 .ustensil-keyword-thumb{
+    display: flex;
+    align-items: center;
     padding: 10px;
     color: white;
     background-color: #ED6454;
     margin: 0 10px 10px 0;
     border-radius: 5px;
+}
+.ustensil-keyword-thumb > span{
+    display: flex;
+}
+.close{
+    margin-left: 5px;
 }
 .container{
     display: flex;
@@ -142,11 +161,6 @@ input{
     margin-right: 10px;
 }
 
-.close{
-    border: 2px solid white;
-    padding: 2px;
-    border-radius: 50%;
-}
 
 #advanced__Search{
     display: flex;
