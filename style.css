@@ -70,7 +70,7 @@ h1{
     margin: 0 10px 10px 0;
     border-radius: 5px;
 }
-.appareil-keyword-thumb  span{
+.appareil-keyword-thumb > span{
     display: flex;
 }
 .ustensil-keyword-thumb{
