@@ -4,7 +4,7 @@
 
 const main = document.getElementById("recipes");
 let filteredRecipes = [...recipes];
-const filter = new RecipeFilter(filteredRecipes);
+//const filter = new RecipeFilter(filteredRecipes);
 
 /**
  * 
