@@ -231,40 +231,90 @@ function getKeyWords(data){
 }
 
 function displayAvailableKeywords(keywords){
+
     ingredientKeywords.innerHTML = "";
     applianceKeyWords.innerHTML = "";
     ustensilsKeyWords.innerHTML = "";
 
-    for (let i = 0; i < keywords.length; i++) {
-        if(keywords[i] instanceof Ingredient){
-            ingredientKeywords.appendChild(keywords[i].listElement);
-            keywords[i].listElement.addEventListener("click", ()=>{
-                searchParams.searchKeywords.push(keywords[i]);
-                keywords[i].displayThumbElement();
+    let ingredients = [];
+    let appliances = [];
+    let ustensils = [];
+
+    keywords.forEach(kw=>{
+        if(kw instanceof Ingredient){
+            ingredients.push(kw.listElement);
+            kw.listElement.addEventListener("click", ()=>{
+                searchParams.searchKeywords.push(kw);
+                kw.displayThumbElement();
                 process();
                 searchIngredients.value = "";
-            })
-        }else if(keywords[i] instanceof Appliance){
-            applianceKeyWords.appendChild(keywords[i].listElement);
-            keywords[i].listElement.addEventListener("click", ()=>{
-                searchParams.searchKeywords.push(keywords[i]);
-                keywords[i].displayThumbElement();
+            });
+        }else if(kw instanceof Appliance){
+            appliances.push(kw.listElement);
+            kw.listElement.addEventListener("click", ()=>{
+                searchParams.searchKeywords.push(kw);
+                kw.displayThumbElement();
                 process();
                 searchAppliance.value = "";
             })
-        }else if(keywords[i] instanceof Ustensil){
-            ustensilsKeyWords.appendChild(keywords[i].listElement);
-            keywords[i].listElement.addEventListener("click", ()=>{
-                searchParams.searchKeywords.push(keywords[i]);
-                keywords[i].displayThumbElement();
+        }else if(kw instanceof Ustensil){
+            ustensils.push(kw.listElement);
+            kw.listElement.addEventListener("click", ()=>{
+                searchParams.searchKeywords.push(kw);
+                kw.displayThumbElement();
                 process();
                 searchUstensils.value = "";
             });
         }else{
             console.log("unknown type");
         }
+    });
 
+    let $wrapper1 = document.createElement('div');
+    let $wrapper2 = document.createElement('div');
+    let $wrapper3 = document.createElement('div');
+
+    if(ingredients.length <= 10){
+        ingredients.forEach(element=>{
+            $wrapper1.appendChild(element);
+        });
+        ingredientKeywords.appendChild($wrapper1);
+    }else if(ingredients.length > 10 && ingredients.length <=20){
+        ingredients.forEach((element, index)=>{
+            if(index <=9){
+                $wrapper1.appendChild(element);
+            }else{
+                $wrapper2.appendChild(element);
+            }
+        });
+        ingredientKeywords.appendChild($wrapper1);
+        ingredientKeywords.appendChild($wrapper2);
+    }else{
+        ingredients.forEach((element, index)=>{
+            if(index <=9){
+                $wrapper1.appendChild(element);
+            }else if(index > 9 && index <=19){
+                $wrapper2.appendChild(element);
+            }else{
+                $wrapper3.appendChild(element);
+            }
+        });
+        ingredientKeywords.appendChild($wrapper1);
+        ingredientKeywords.appendChild($wrapper2);
+        ingredientKeywords.appendChild($wrapper3);
     }
+
+    let $applianceWrapper = document.createElement('div');
+    appliances.forEach(element=>{
+        $applianceWrapper.appendChild(element);
+    });
+    applianceKeyWords.appendChild($applianceWrapper);
+
+    let $ustensilWrapper = document.createElement('div');
+    ustensils.forEach(element=>{
+        $ustensilWrapper.appendChild(element);
+    });
+    ustensilsKeyWords.appendChild($ustensilWrapper);
 }
 
 searchBar.addEventListener('input', function(){
