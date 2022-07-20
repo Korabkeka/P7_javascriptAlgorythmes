@@ -506,3 +506,8 @@ searchUstensils.addEventListener("input", function(){
     }
 });
 
+function show(element){
+    let name = element.id.split('-')[1];
+    document.getElementById(`after-${name}`).style.display = "flex";
+    document.getElementById(`before-${name}`).style.display = "none";
+}
