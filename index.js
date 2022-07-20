@@ -566,3 +566,9 @@ function show(element){
     document.getElementById(`after-${name}`).style.display = "flex";
     document.getElementById(`before-${name}`).style.display = "none";
 }
+
+function hide(element){
+    let name = element.parentNode.parentNode.id.split('-')[1];
+    document.getElementById(`after-${name}`).style.display = "none";
+    document.getElementById(`before-${name}`).style.display = "flex";
+}
