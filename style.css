@@ -161,7 +161,9 @@ input{
     margin-right: 10px;
 }
 
-
+#ingredient-keywords div, #appliance-keywords div, #ustensils-keywords div{
+    line-height: 22px;
+}
 #advanced__Search{
     display: flex;
     position: absolute;
