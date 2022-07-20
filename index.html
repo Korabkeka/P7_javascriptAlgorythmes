@@ -15,32 +15,59 @@
 
     <section id="search-bar">
         <input type="text" name="search-bar" id="search-bar__input">
-        <img src="/assets/search.svg" id="search-bar__icon" alt="search">
+        <img src="/assets/search.svg" id="search-bar__icon" alt="search">       
     </section>
     <section id="keywords"></section>
     <div id="advanced__Search">
-        <div>
-            <div>
-                <input type="text" name="ingredients" id="ingredients" placeholder="ingrédients"></input>
-                <img src="/assets/Vector.svg" alt="arrow"/>
+        <div class="container">
+            <div id="before-ingredient" onclick="show(this)">Ingredients <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white"/>
+                </svg>
             </div>
-            <ul id="ingredient-keywords"></ul>
+            <div id="after-ingredient">
+                <div class="input">
+                    <input type="text" name="ingredients" id="ingredients" placeholder="Rechercher un ingrédient"></input>
+                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white"/>
+                    </svg>
+                </div>
+                <div id="ingredient-keywords"></div>
+            </div>
+            
         </div>
 
-        <div >
-            <div>
-                <input type="text" name="appliance" id="appliance" placeholder="appareils"></input>
-                <img src="/assets/Vector.svg" alt="arrow"/>
+        <div class="container">
+            <div id="before-appliance" onclick="show(this)">Appareils <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white"/>
+                </svg>
             </div>
-            <ul id="appliance-keywords"></ul>
+            <div id="after-appliance">
+                <div class="input">
+                    <input type="text" name="appliance" id="appliance" placeholder="Rechercher un appareil"></input>
+                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white"/>
+                    </svg>
+                </div>
+            <div id="appliance-keywords"></div>
+            </div>
+            
         </div>
 
-        <div>
-            <div>
-                <input type="text" name="ustensils" id="ustensils" placeholder="ustensiles"></input>
-                <img src="/assets/Vector.svg" alt="arrow"/>
+        <div class="container">
+            <div id="before-ustensil" onclick="show(this)">Ustensiles <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white"/>
+                </svg>
             </div>
-            <ul id="ustensils-keywords"></ul>
+            <div id="after-ustensil">
+                <div class="input">
+                    <input type="text" name="ustensils" id="ustensils" placeholder="Rechercher un ustensile"></input>
+                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white"/>
+                    </svg>
+                </div>
+                <div id="ustensils-keywords"></div>
+            </div>
+            
         </div>
     </div>
     
@@ -51,6 +78,7 @@
 
     <script src="/scripts/templates/Recipe.js"></script>
     <script src="recipes.js"></script>
+    <script src="/scripts/filters/RecipeFilter.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
