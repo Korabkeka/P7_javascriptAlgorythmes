@@ -15,7 +15,8 @@ class RecipeTemplate{
                     
                 </div>
                 <div class="recipe__info__bottom">
-                    ${this.getListTemplate()}
+                    <ul>${this.getListTemplate()}</ul>
+                    
                     <p class="recipe__info__bottom--description">${this.recipe.description}</p>
                 </div>
             </div>
