@@ -27,8 +27,6 @@ let filteredRecipes = [...recipes];
         main.innerHTML = $temp.innerHTML;
     }
 
-    
-
 }
 
 displayRecipes(filteredRecipes);
