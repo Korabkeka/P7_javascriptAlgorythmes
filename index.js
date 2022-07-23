@@ -13,15 +13,21 @@ let filteredRecipes = [...recipes];
  * creates and displays an article for each item in Array
  */
 function displayRecipes(data){
-    let $temp = document.createElement('div');
-
-    data.forEach(recipe =>{
-        //let item = new Recipe(recipe);
+    
+    if(data.length === 0){
+        main.innerHTML = `<p class="error">Aucune recette ne correspond à votre critère… vous pouvez
+        chercher « tarte aux pommes », « poisson » etc...</p>`
+    }else{
+        let $temp = document.createElement('div');
+        data.forEach(recipe =>{
         let template = new RecipeTemplate(recipe);
         $temp.appendChild(template.element);
-    });
+        });
 
-    main.innerHTML = $temp.innerHTML;
+        main.innerHTML = $temp.innerHTML;
+    }
+
+    
 
 }
 
