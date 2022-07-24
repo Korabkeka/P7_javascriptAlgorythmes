@@ -152,14 +152,15 @@ input{
 #ingredient-keywords, #appliance-keywords, #ustensils-keywords{
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    line-height: 18px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(10, auto);
+    line-height: 20px;
     width: 100%;
 }
 #ingredient-keywords p, #appliance-keywords p, #ustensils-keywords p{
     margin: 0;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 #advanced__Search{
