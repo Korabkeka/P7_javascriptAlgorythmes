@@ -43,11 +43,8 @@ const ustensilsKeyWords = document.getElementById("ustensils-keywords");
 const keyWordThumbs = document.getElementById('keywords');
 
 let _ingredients = [];
-let secondaryIngredients = [];
 let _appareils = [];
-let secondaryAppareils = [];
 let _ustensils = [];
-let secondaryUstensils = [];
 let allKeyWords;
 let searchParams = {
     mainInput : searchBar.value,
@@ -509,7 +506,6 @@ searchIngredients.addEventListener("input", function(){
     if(this.value.length >=3){
         searchKeywordsByType(this.value, "Ingredient");
     }else{
-        ingredientKeywords.innerHTML = "";
         process();
     }
 });
