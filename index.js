@@ -476,8 +476,6 @@ function searchKeywordsByType(input, type){
                 for (let i = 0; i < children.length; i++) {
                     if(!children[i].textContent.includes(input)){
                         children[i].classList.add("hide");
-                    }else{
-                        secondaryAppareils.push(children[i].textContent)
                     }
                 }
             }
@@ -497,8 +495,6 @@ function searchKeywordsByType(input, type){
                 for (let i = 0; i < children.length; i++) {
                     if(!children[i].textContent.includes(input)){
                         children[i].classList.add("hide");
-                    }else{
-                        secondaryUstensils.push(children[i].textContent)
                     }
                 }
             }
@@ -510,7 +506,6 @@ function searchKeywordsByType(input, type){
 }
 
 searchIngredients.addEventListener("input", function(){
-    //secondaryIngredients = [];
     if(this.value.length >=3){
         searchKeywordsByType(this.value, "Ingredient");
     }else{
@@ -520,8 +515,6 @@ searchIngredients.addEventListener("input", function(){
 });
 
 searchAppliance.addEventListener("input", function(){
-    secondaryAppareils = [];
-    this.querySelectorAll('.hide').forEach(el => el.classList.remove("hide"));
     if(this.value.length >=3){
         searchKeywordsByType(this.value, "Appliance");
     }else{
@@ -530,8 +523,6 @@ searchAppliance.addEventListener("input", function(){
 });
 
 searchUstensils.addEventListener("input", function(){
-    secondaryUstensils = [];
-    this.querySelectorAll('.hide').forEach(el => el.classList.remove("hide"));
     if(this.value.length >=3){
         searchKeywordsByType(this.value, "Ustensil");
     }else{
