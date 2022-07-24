@@ -278,46 +278,14 @@ function displayAvailableKeywords(keywords){
         }
     });
 
-    let $wrapper1 = document.createElement('div');
-    let $wrapper2 = document.createElement('div');
-    let $wrapper3 = document.createElement('div');
-
-    if(ingredients.length <= 10){
-        ingredients.forEach(element=>{
-            $wrapper1.appendChild(element);
-        });
-        ingredientKeywords.appendChild($wrapper1);
-    }else if(ingredients.length > 10 && ingredients.length <=20){
-        ingredients.forEach((element, index)=>{
-            if(index <=9){
-                $wrapper1.appendChild(element);
-            }else{
-                $wrapper2.appendChild(element);
-            }
-        });
-        ingredientKeywords.appendChild($wrapper1);
-        ingredientKeywords.appendChild($wrapper2);
-    }else{
-        ingredients.forEach((element, index)=>{
-            if(index <=9){
-                $wrapper1.appendChild(element);
-            }else if(index > 9 && index <=19){
-                $wrapper2.appendChild(element);
-            }else{
-                $wrapper3.appendChild(element);
-            }
-        });
-        ingredientKeywords.appendChild($wrapper1);
-        ingredientKeywords.appendChild($wrapper2);
-        ingredientKeywords.appendChild($wrapper3);
-    }
-
-    let $applianceWrapper = document.createElement('div');
-    appliances.forEach(element=>{
-        $applianceWrapper.appendChild(element);
+    ingredients.forEach(element =>{
+        ingredientKeywords.appendChild(element);
     });
-    applianceKeyWords.appendChild($applianceWrapper);
 
+    appliances.forEach(element=>{
+        applianceKeyWords.appendChild(element);
+    });
+    
     ustensils.forEach(element=>{
         ustensilsKeyWords.appendChild(element);
     });
