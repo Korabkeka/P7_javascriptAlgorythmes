@@ -281,51 +281,21 @@ function displayAvailableKeywords(keywords){
         }
     });
 
-    let $wrapper1 = document.createElement('div');
-    let $wrapper2 = document.createElement('div');
-    let $wrapper3 = document.createElement('div');
+    ingredients.forEach(element =>{
+        ingredientKeywords.appendChild(element);
+    });
 
-    if(ingredients.length <= 10){
-        ingredients.forEach(element=>{
-            $wrapper1.appendChild(element);
-        });
-        ingredientKeywords.appendChild($wrapper1);
-    }else if(ingredients.length > 10 && ingredients.length <=20){
-        ingredients.forEach((element, index)=>{
-            if(index <=9){
-                $wrapper1.appendChild(element);
-            }else{
-                $wrapper2.appendChild(element);
-            }
-        });
-        ingredientKeywords.appendChild($wrapper1);
-        ingredientKeywords.appendChild($wrapper2);
-    }else{
-        ingredients.forEach((element, index)=>{
-            if(index <=9){
-                $wrapper1.appendChild(element);
-            }else if(index > 9 && index <=19){
-                $wrapper2.appendChild(element);
-            }else{
-                $wrapper3.appendChild(element);
-            }
-        });
-        ingredientKeywords.appendChild($wrapper1);
-        ingredientKeywords.appendChild($wrapper2);
-        ingredientKeywords.appendChild($wrapper3);
-    }
-
-    let $applianceWrapper = document.createElement('div');
+    //let $applianceWrapper = document.createElement('div');
     appliances.forEach(element=>{
-        $applianceWrapper.appendChild(element);
+        applianceKeyWords.appendChild(element);
     });
-    applianceKeyWords.appendChild($applianceWrapper);
+    
 
-    let $ustensilWrapper = document.createElement('div');
+    //let $ustensilWrapper = document.createElement('div');
     ustensils.forEach(element=>{
-        $ustensilWrapper.appendChild(element);
+        ustensilsKeyWords.appendChild(element);
     });
-    ustensilsKeyWords.appendChild($ustensilWrapper);
+    
 }
 
 searchBar.addEventListener('input', function(){
@@ -468,16 +438,18 @@ function clearKeywordsList(){
 }
 
 function searchKeywordsByType(input, type){
-
+    
     switch (type) {
         case "Ingredient":
             if(ingredientKeywords.hasChildNodes()){
                 let children = ingredientKeywords.childNodes;
                 for (let i = 0; i < children.length; i++) {
-                    if(!children[i].textContent.includes(input)){
-                        children[i].classList.add("hide");
+                    const element = children[i];
+                    if(!element.textContent.includes(input)){
+                        element.classList.add("hide");
                     }
-                }
+                }   
+                
             }else{
                 getKeyWords(filteredRecipes);
                 displayAvailableKeywords(_ingredients);
@@ -485,9 +457,7 @@ function searchKeywordsByType(input, type){
                 for (let i = 0; i < children.length; i++) {
                     if(!children[i].textContent.includes(input)){
                         children[i].classList.add("hide");
-                    }else{
-                        secondaryIngredients.push(children[i].textContent)
-                    }
+                    }   
                 }
             }
             break;
@@ -540,17 +510,18 @@ function searchKeywordsByType(input, type){
 }
 
 searchIngredients.addEventListener("input", function(){
-    secondaryIngredients = [];
-
+    //secondaryIngredients = [];
     if(this.value.length >=3){
         searchKeywordsByType(this.value, "Ingredient");
     }else{
+        ingredientKeywords.innerHTML = "";
         process();
     }
 });
 
 searchAppliance.addEventListener("input", function(){
     secondaryAppareils = [];
+    this.querySelectorAll('.hide').forEach(el => el.classList.remove("hide"));
     if(this.value.length >=3){
         searchKeywordsByType(this.value, "Appliance");
     }else{
@@ -560,6 +531,7 @@ searchAppliance.addEventListener("input", function(){
 
 searchUstensils.addEventListener("input", function(){
     secondaryUstensils = [];
+    this.querySelectorAll('.hide').forEach(el => el.classList.remove("hide"));
     if(this.value.length >=3){
         searchKeywordsByType(this.value, "Ustensil");
     }else{

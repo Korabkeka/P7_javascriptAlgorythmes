@@ -153,15 +153,13 @@ input{
     padding: 0;
     margin: 0;
     display: flex;
-    max-height: 232px;
+    flex-direction: column;
+    line-height: 18px;
     width: 100%;
 }
 #ingredient-keywords p, #appliance-keywords p, #ustensils-keywords p{
     margin: 0;
     margin-right: 10px;
-}
-#ingredient-keywords div, #appliance-keywords div, #ustensils-keywords div{
-    line-height: 22px;
 }
 
 #advanced__Search{
