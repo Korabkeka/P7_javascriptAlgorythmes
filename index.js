@@ -282,13 +282,10 @@ function displayAvailableKeywords(keywords){
         ingredientKeywords.appendChild(element);
     });
 
-    //let $applianceWrapper = document.createElement('div');
     appliances.forEach(element=>{
         applianceKeyWords.appendChild(element);
     });
     
-
-    //let $ustensilWrapper = document.createElement('div');
     ustensils.forEach(element=>{
         ustensilsKeyWords.appendChild(element);
     });
