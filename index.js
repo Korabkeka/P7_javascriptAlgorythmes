@@ -318,11 +318,10 @@ function displayAvailableKeywords(keywords){
     });
     applianceKeyWords.appendChild($applianceWrapper);
 
-    let $ustensilWrapper = document.createElement('div');
     ustensils.forEach(element=>{
-        $ustensilWrapper.appendChild(element);
+        ustensilsKeyWords.appendChild(element);
     });
-    ustensilsKeyWords.appendChild($ustensilWrapper);
+    
 }
 
 searchBar.addEventListener('input', function(){
@@ -470,69 +469,65 @@ function clearKeywordsList(){
 }
 
 function searchKeywordsByType(input, type){
-
+    
     switch (type) {
         case "Ingredient":
             if(ingredientKeywords.hasChildNodes()){
                 let children = ingredientKeywords.childNodes;
-                children.forEach(child=>{
-                    if(!child.textContent.includes(input)){
-                        child.classList.add("hide");
+                for (let i = 0; i < children.length; i++) {
+                    const element = children[i];
+                    if(!element.textContent.includes(input)){
+                        element.classList.add("hide");
                     }
-                });
+                }   
+                
             }else{
                 getKeyWords(filteredRecipes);
                 displayAvailableKeywords(_ingredients);
                 let children = ingredientKeywords.childNodes;
-                children.forEach(child=>{
-                    if(!child.textContent.includes(input)){
-                        child.classList.add("hide");
-                    }else{
-                        secondaryIngredients.push(child.textContent);
-                    }
-                });
+                for (let i = 0; i < children.length; i++) {
+                    if(!children[i].textContent.includes(input)){
+                        children[i].classList.add("hide");
+                    }   
+                }
             }
             break;
         case "Appliance":
             if(applianceKeyWords.hasChildNodes()){
                 let children = applianceKeyWords.childNodes;
-                children.forEach(child=>{
-                    if(!child.textContent.includes(input)){
-                        child.classList.add("hide");
+                for (let i = 0; i < children.length; i++) {
+                    if(!children[i].textContent.includes(input)){
+                        children[i].classList.add("hide");
                     }
-                });
+                }
             }else{
                 getKeyWords(filteredRecipes);
                 displayAvailableKeywords(_appareils);
                 let children = applianceKeyWords.childNodes;
-                children.forEach(child=>{
-                    if(!child.textContent.includes(input)){
-                        child.classList.add("hide");
-                    }else{
-                        secondaryAppareils.push(child.textContent)
+                for (let i = 0; i < children.length; i++) {
+                    if(!children[i].textContent.includes(input)){
+                        children[i].classList.add("hide");
                     }
-                });
+                }
             }
             break;
         case "Ustensil":
             if(ustensilsKeyWords.hasChildNodes()){
                 let children = ustensilsKeyWords.childNodes;
-                children.forEach(child=>{
-                    if(!child.textContent.includes(input)){
-                        child.classList.add("hide");
+                for (let i = 0; i < children.length; i++) {
+                    if(!children[i].textContent.includes(input)){
+                        children[i].classList.add("hide");
                     }
-                });
+                }
             }else{
                 getKeyWords(filteredRecipes);
                 displayAvailableKeywords(_ustensils);
                 let children = ustensilsKeyWords.childNodes;
-                children.forEach(child=>{
-                    if(!child.textContent.includes(input)){
-                        child.classList.add("hide");
-                    }else{
-                        secondaryUstensils.push(child.textContent)
+                for (let i = 0; i < children.length; i++) {
+                    if(!children[i].textContent.includes(input)){
+                        children[i].classList.add("hide");
                     }
-                });
+                }
             }
             break;
         default:
@@ -542,19 +537,14 @@ function searchKeywordsByType(input, type){
 }
 
 searchIngredients.addEventListener("input", function(){
-    secondaryIngredients = [];
-
     if(this.value.length >=3){
         searchKeywordsByType(this.value, "Ingredient");
     }else{
         process();
-
     }
-    console.log(ingredientKeywords, filteredRecipes);
 });
 
 searchAppliance.addEventListener("input", function(){
-    secondaryAppareils = [];
     if(this.value.length >=3){
         searchKeywordsByType(this.value, "Appliance");
     }else{
@@ -563,14 +553,12 @@ searchAppliance.addEventListener("input", function(){
 });
 
 searchUstensils.addEventListener("input", function(){
-    secondaryUstensils = [];
     if(this.value.length >=3){
         searchKeywordsByType(this.value, "Ustensil");
     }else{
         process();
     }
 });
-
 function show(element){
     let name = element.id.split('-')[1];
     document.getElementById(`after-${name}`).style.display = "flex";
